@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.Stack;
 import java.util.Random;
 import java.util.Scanner;
-
+//git test
 class Constant
 {
 	public static final int MAX = 100000;
