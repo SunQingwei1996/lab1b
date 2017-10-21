@@ -158,7 +158,7 @@ public class lab1b {
    int tempbyte;
    int word_number=0,word_new=-1;
    File f=new File(filename);
-   String str = new String();
+   //String str = new String();
    if(!f.exists())
    {
      System.out.println("文件不存在");
