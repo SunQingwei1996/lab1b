@@ -19,8 +19,8 @@ class Constant
  public class Graph {
 	private static int V;
 	private static int E = 0;
-	private static HashMap<String, LinkedList<Edge>> Vertex;
-	private static Edge[]  edges;
+	private HashMap<String, LinkedList<Edge>> Vertex;
+	private Edge[]  edges;
 	private String [][] Path;
 	private int[][] Distance;
 	private Stack<String> stack_path = new Stack<String>();
@@ -108,7 +108,7 @@ class Constant
     }*/
 
 	public static void main() {
-		Graph G = new Graph();
+		//Graph G = new Graph();
 		//G.readGraph("aa bb c  d iow wjkdjsk njhwu aa bb".split("\\s+"));
 	}
 

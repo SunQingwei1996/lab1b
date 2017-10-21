@@ -54,7 +54,9 @@ public class lab1b {
          }catch(Exception e){
            e.printStackTrace();
          }
-         number=readfile(name, s);
+        if(name!=null){
+          number=readfile(name, s);
+        }
          System.out.print("文件内容如下：\n");
          for(int i=0;i<=number;i++)
          {
