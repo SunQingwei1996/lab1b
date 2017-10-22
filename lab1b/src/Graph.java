@@ -19,20 +19,20 @@ class Constant
  public class Graph {
 	private static int V;
 	private static int E = 0;
-	private static HashMap<String, LinkedList<Edge>> Vertex;
-	private static Edge[]  edges;
+	private HashMap<String, LinkedList<Edge>> Vertex;
+	private Edge[]  edges;
 	private String [][] Path;
 	private int[][] Distance;
 	private Stack<String> stack_path = new Stack<String>();
 	private HashMap<String, Integer> vexTOint;
-	
+
 	class Edge
 	{
 		String start_edge = "";
 		String end_edge= "";
 		int weight = 0;
 		boolean flag = false;
-		
+
 		public boolean equals(Edge temp)
 		{
 			if(start_edge.equals(temp.start_edge) && end_edge.equals(temp.end_edge))
@@ -44,19 +44,19 @@ class Constant
 
 		}
 	}
-	
-	
+
+
 	public HashMap<String, LinkedList<Edge>> getVertex(){
 		return Vertex;
 	}
-	
+
 	public void readGraph(String[] readin,int number) //读图
 	{
 		Vertex = new HashMap<String,LinkedList<Edge>>();
 		edges = new Edge[number];
-		
-		for (int i=0;i<number;i++) 
-		{ 
+
+		for (int i=0;i<number;i++)
+		{
 			edges[i] = new Edge();
 		}
 		//System.out.println(readin.length);
@@ -64,7 +64,7 @@ class Constant
 		{
 			String title = readin[i];
 			String last = readin[i+1];
-			
+
 			int flag = 0;
 			for(int j=0;j<E;j++)
 			{
@@ -83,36 +83,36 @@ class Constant
 				E++;
 			}
 		}
-		
+
 		for(int i=0;i<readin.length;i++)
 		{
 			Vertex.put(readin[i], new LinkedList<Edge>());
 		}
-		
+
 		V = Vertex.size();
-		
+
 		for(int i=0;i<E;i++)
 		{
 			Vertex.get(edges[i].start_edge).add(edges[i]);
 		}
 	}
-	
+
 	/*public String queryBridgeWords(String word1, String word2) {
 		String a = "abc";
 		return a;
 	}
-	
+
 	public String generateNewText(String inputText){//根据桥接词生成新文本
 		String b = "abc";
 		return b;
     }*/
-	
+
 	public static void main() {
-		Graph G = new Graph();
+		//Graph G = new Graph();
 		//G.readGraph("aa bb c  d iow wjkdjsk njhwu aa bb".split("\\s+"));
 	}
-	
-	
+
+
 	public String queryBridgeWords (String word1,String word2) {//输出桥接词结果
 		String on="";
 		if(Vertex.containsKey(word1) && Vertex.containsKey(word2))
@@ -134,9 +134,9 @@ class Constant
 		}
 		return on;
 	}
-	
-	
-	
+
+
+
 	public String bridgeWords(String word1,String word2)//找桥接词
 	{
 		String outt = "";
@@ -183,8 +183,8 @@ class Constant
 		}
 		return outt;
 	}
-	
-	
+
+
 	public String generateNewText(String[] inputText)//根据桥接词生成新文本
 	{
 		LinkedList<String> outt = new LinkedList<String>();
@@ -221,7 +221,7 @@ class Constant
 		System.out.println(endText);
 		return endText;
 	}
-	
+
 	/*public void f_to_one(String start)
 	{
 		for(String end:vexTOint.keySet())
@@ -320,7 +320,7 @@ class Constant
 			}
 		}
 	}
-	
+
 	public String randomWalk() throws IOException
 	{
 		HashMap<Edge, Boolean> visit = new HashMap<Edge,Boolean>();
@@ -343,8 +343,8 @@ class Constant
 				result = result+ string + " ";
 			}
 		}
-		
-		
+
+
 		LinkedList<Edge> p;
 
 		while(!stack_path.empty())
@@ -363,7 +363,7 @@ class Constant
 						System.out.print(""+edge.end_edge);
 						result = result+ edge.end_edge + " ";
 						visit.replace(edge, true);
-						
+
 						stack_path.push(edge.end_edge);
 						break;
 					}
@@ -372,25 +372,24 @@ class Constant
 
 					}
 				}
-				
+
 				else
 				{
 					System.out.print(" "+edge.end_edge);
 					result = result + " " + edge.end_edge;
-					
+
 					break;
-				}			
+				}
 
 			}
 
 		}
 		System.out.println("\n随机游走结束");
-		
+
 		File file = new File("D:\\random.txt");
-		BufferedWriter output = new BufferedWriter(new FileWriter(file));  
-	    output.write(result);  
+		BufferedWriter output = new BufferedWriter(new FileWriter(file));
+	    output.write(result);
 	    output.close();
 	    return result;
 	}
 }
- 
