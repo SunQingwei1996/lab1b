@@ -1,5 +1,4 @@
  package lab1b;
- 
 import java.util.LinkedList;
 import java.util.Scanner;
 import org.omg.CORBA.PUBLIC_MEMBER;
@@ -25,9 +24,7 @@ public class lab1b {
     	String word4;
     	String word5;
     	String outt = "";
-    	
-        Graph G =new Graph();
-        
+    	Graph G =new Graph();
         System.out.println("欢迎您使用本系统！");
 		do {
     	System.out.println("\n请按功能选择！");
@@ -42,9 +39,11 @@ public class lab1b {
     	Scanner in = new Scanner(System.in);
     	cchoice = in.nextInt();
     	
+    	
     	switch(cchoice){
     		case 1:
-    			String name = null;
+    			test("d:/word.txt");
+    			/*String name = null;
     			String[] s = new String[1000];
     			int number;
     			InputStreamReader stdin = new InputStreamReader(System.in);
@@ -63,7 +62,7 @@ public class lab1b {
     			}
     			G.readGraph(s,number+1);	
     			break;
-    			
+    			*/
     		case 2:
     			showDirectedGraph(G);
     			break;
@@ -97,7 +96,8 @@ public class lab1b {
     			System.out.println("请输入第二个单词");
     			word4 = in.nextLine();
     			G.Floyd();
-    			G.calcShortestPath(word3, word4);
+    			System.out.println(G.calcShortestPath(word3, word4));
+    			
     			//G.f_to_one(word3);
     			break;
     			
@@ -144,7 +144,6 @@ public class lab1b {
 				gV.addln(edge.start_edge + "->" + edge.end_edge +"[label = "+edge.weight +"]");
 			}
 		}
-		
 		gV.addln(gV.end_graph());
 		File to = new File("D:\\test.jpg"); 
 		gV.writeGraphToFile(gV.getGraph(gV.getDotSource(), "jpg"), to);
@@ -192,4 +191,20 @@ public class lab1b {
 			}
 		return word_number;
 	}
+	
+	public static Graph test(String name) 
+	{
+		Graph G =new Graph();
+		String[] s = new String[1000];
+		int number;
+		number=readfile(name, s);
+		System.out.print("文件内容如下：\n");
+		for(int i=0;i<=number;i++)
+		{
+			System.out.println(s[i]);
+		}
+		G.readGraph(s,number+1);
+		return G;
+	}
+	
 }

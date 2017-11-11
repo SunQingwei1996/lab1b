@@ -20,7 +20,7 @@ class Constant
 	private static int V;
 	private static int E = 0;
 	private static HashMap<String, LinkedList<Edge>> Vertex;
-	private static Edge[]  edges;
+	public static Edge[]  edges;
 	private String [][] Path;
 	private int[][] Distance;
 	private Stack<String> stack_path = new Stack<String>();
@@ -121,15 +121,18 @@ class Constant
 			if(outt.equals(""))
 			{
 				System.out.println("No bridge words from " + "'"+ word1 +"'"+" to " + "'"+word2+"'" +" !");
+				on = "No bridge words from " + "'"+ word1 +"'"+" to " + "'"+word2+"'" +" !";
 			}
 			else
 			{
 				System.out.println("The bridge words from " + "'" + word1 + "'" + " to " + "'" +word2 +"'"+" are: " +outt);
+				on = "The bridge words from " + "'" + word1 + "'" + " to " + "'" +word2 +"'"+" are: " +outt;
 			}
 
 		}
 		else
 		{
+			on = "No"+"'"+word1+"'"+ "or" +"'"+word2+"'"+ "in the graph!";
 			System.out.println("No"+"'"+word1+"'"+ "or" +"'"+word2+"'"+ "in the graph!");
 		}
 		return on;
@@ -234,42 +237,49 @@ class Constant
 		}
 	}*/
 
-	public String calcShortestPath(String start,String end)
-	{
-		String out="";
-		if(start.equals(end) || Distance[vexTOint.get(start)][vexTOint.get(end)] == Constant.MAX)
-		{
-			System.out.println("No way!");
-		}
-		else
-		{
-			System.out.print(start+"->");
-			shortestPath(start, end);
-			System.out.println(end);
-			System.out.println("The length of path is "+Distance[vexTOint.get(start)][vexTOint.get(end)]);
-		}
-		return out;
-	}
+	public String calcShortestPath(String word1, String word2) {
+	    String outt = "";
+	    // word1word2´æÔÚ
+	    if (vexTOint.containsKey(word1) && vexTOint.containsKey(word2)) {
+	      if (word1.equals(word2)
+	          || Distance[vexTOint.get(word1)][vexTOint.get(word2)] == Constant.MAX) {
+	        outt = "No way!";
+	        // ÓÐÂ·¾¶
+	      } else {
+	        String temp = shortestPath(word1, word2);
+	        outt = word1 + "->" + temp + word2 + "\nThe length of path is "
+	            + Distance[vexTOint.get(word1)][vexTOint.get(word2)] + "\n";
+	      }
+	    } else {
+	      outt = word1 + " or " + word2 + " is not in the graph!";
+	    }
+	    return outt;
+	  }
 
 
-	public void shortestPath(String start,String end)
+
+	public String shortestPath(String start,String end)
 	{
+		String outt = "";
 		int i = vexTOint.get(start);
 		int j = vexTOint.get(end);
 
 		if(Path[i][j].equals(""))
 		{
-			return;
+			return "";
 		}
 		else
 		{
 			stack_path.push(Path[i][j]);
-			shortestPath(start, Path[i][j]);
-			if(!stack_path.empty())
-				System.out.print(stack_path.pop()+"->");
-			shortestPath(Path[i][j], end);
-			if(!stack_path.empty())
-				System.out.print(stack_path.pop()+"->");
+			outt = outt + shortestPath(start, Path[i][j]);
+			if(!stack_path.empty()) {
+				outt = outt + stack_path.pop()+"->";
+			}
+				outt = outt + shortestPath(Path[i][j], end);
+			if(!stack_path.empty()) {
+				outt = outt + stack_path.pop()+"->";
+			}
+			return outt ;
 		}
 	}
 
